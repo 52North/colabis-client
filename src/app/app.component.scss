@@ -1,0 +1,20 @@
+:host {
+    .header {
+        text-align:center;
+    }
+    .content {
+        display: flex;
+        flex-direction: row;
+        .left-map {
+            background-color: red;
+        }
+        .right-map {
+            background-color: blue;
+        }
+        .left-map,
+        .right-map {
+            width: 50%;
+            height: 50vh;
+        }
+    }
+}
