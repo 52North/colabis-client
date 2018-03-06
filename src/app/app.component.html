@@ -1,15 +1,19 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <div class="header">
   <h1>
     SWMM Simulation
   </h1>
 </div>
-
 <div class="content">
   <div class="left-map">
-    
+    <div class="header">
+      Forecast WITHOUT street cleaning
+    </div>
+    <n52-geometry-map-viewer [mapId]="'left-map'" [overlayMaps]="overlayLeftMaps" [maxMapZoom]="15" [fitBounds]="fitBounds"></n52-geometry-map-viewer>
   </div>
   <div class="right-map">
-    
+    <div class="header">
+      Forecast WITH street cleaning
+    </div>
+    <n52-geometry-map-viewer [mapId]="'right-map'" [overlayMaps]="overlayRightMaps" [maxMapZoom]="15" [fitBounds]="fitBounds"></n52-geometry-map-viewer>
   </div>
 </div>
