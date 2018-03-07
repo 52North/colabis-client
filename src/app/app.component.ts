@@ -1,8 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { LayerOptions } from '@helgoland/map';
-import { geoJSON } from 'leaflet';
-import { circleMarker } from 'leaflet';
+import { Feature, FeatureCollection, GeoJsonProperties, GeometryObject } from 'geojson';
+import { circleMarker, geoJSON, LayerEvent } from 'leaflet';
+
+import {
+  HeavyMetalSamplesDialogComponent,
+} from './components/feature-dialogs/heavy-metal-samples-dialog/heavy-metal-samples-dialog.component';
+import {
+  StreetCleaningDialogComponent,
+} from './components/feature-dialogs/street-cleaning-dialog/street-cleaning-dialog.component';
+import { HeavyMetalSamples } from './model/feature-properties/heavy-metal-samples';
 
 @Component({
   selector: 'app-root',
@@ -36,19 +45,24 @@ export class AppComponent implements OnInit {
   };
 
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private dialog: MatDialog
   ) { }
 
   public ngOnInit(): void {
     this.httpClient
       .get<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(this.hmsUrl)
       .subscribe((geojson) => {
-        const layer = geoJSON(geojson, {
+        const layer = geoJSON<GeoJSON.FeatureCollection<GeoJSON.GeometryObject>>(geojson, {
           pointToLayer: (feature, latlng) => {
             return circleMarker(latlng, this.pointStyle);
           }
-        }).bindPopup((target) => {
-          return 'horst';
+        }).on('click', (event: LayerEvent) => {
+          const properties = ((event.layer as L.GeoJSON).feature as Feature<GeometryObject, HeavyMetalSamples>).properties;
+          this.dialog.open(HeavyMetalSamplesDialogComponent, {
+            data: properties,
+            width: '500px'
+          });
         });
         this.overlayLeftMaps.set('hms_geojson', { label: 'hms_geojson', visible: true, layer });
       });
@@ -58,10 +72,14 @@ export class AppComponent implements OnInit {
       .subscribe((geojson) => {
         const layer = geoJSON(geojson, {
           style: (feature) => this.polygonStyle
-        }).bindPopup((target) => {
-          return 'horst';
+        }).on('click', (event: LayerEvent) => {
+          const properties = ((event.layer as L.GeoJSON).feature as Feature<GeometryObject, GeoJsonProperties>).properties;
+          this.dialog.open(StreetCleaningDialogComponent, {
+            data: properties,
+            width: '500px'
+          });
         });
-        this.overlayRightMaps.set('sc_geojson', { label: 'sc_geojson', visible: true, layer });
+        this.overlayLeftMaps.set('sc_geojson', { label: 'sc_geojson', visible: true, layer });
       });
   }
 
