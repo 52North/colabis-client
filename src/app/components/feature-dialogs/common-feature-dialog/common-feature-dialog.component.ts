@@ -6,11 +6,6 @@ export interface Element {
   value: string;
 }
 
-@Component({
-  selector: 'app-common-feature-dialog',
-  templateUrl: './common-feature-dialog.component.html',
-  styleUrls: ['./common-feature-dialog.component.scss']
-})
 export abstract class CommonFeatureDialogComponent implements OnInit {
 
   public title: string;

@@ -172,8 +172,8 @@
     tslib "^1.7.1"
 
 "@helgoland/map@^0.0.1-alpha.33":
-  version "0.0.1-alpha.35"
-  resolved "https://registry.yarnpkg.com/@helgoland/map/-/map-0.0.1-alpha.35.tgz#e40ecb913034e046962495da127b451e1573f394"
+  version "0.0.1-alpha.36"
+  resolved "https://registry.yarnpkg.com/@helgoland/map/-/map-0.0.1-alpha.36.tgz#cfb9daa7b1cc9b38e23b35809a570cdef943cf94"
   dependencies:
     "@types/leaflet" "^1.2.5"
     "@types/leaflet.markercluster" "^1.0.2"
