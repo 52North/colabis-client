@@ -4,16 +4,26 @@
   </h1>
 </div>
 <div class="content">
-  <div class="left-map">
+  <div class="left">
     <div class="header">
       Forecast WITHOUT street cleaning
     </div>
-    <n52-geometry-map-viewer [mapId]="'left-map'" [overlayMaps]="overlayLeftMaps" [layerControlOptions]="layerControlOptions" [fitBounds]="fitBounds"></n52-geometry-map-viewer>
+    <div class="map">
+      <n52-geometry-map-viewer [mapId]="'left-map'" [overlayMaps]="overlayLeftMaps" [layerControlOptions]="layerControlOptions"
+        [fitBounds]="fitBounds"></n52-geometry-map-viewer>
+    </div>
   </div>
-  <div class="right-map">
+  <div class="right">
     <div class="header">
       Forecast WITH street cleaning
     </div>
-    <n52-geometry-map-viewer [mapId]="'right-map'" [overlayMaps]="overlayRightMaps" [layerControlOptions]="layerControlOptions" [fitBounds]="fitBounds"></n52-geometry-map-viewer>
+    <div class="map">
+      <n52-geometry-map-viewer [mapId]="'right-map'" [overlayMaps]="overlayRightMaps" [layerControlOptions]="layerControlOptions"
+        [fitBounds]="fitBounds"></n52-geometry-map-viewer>
+    </div>
   </div>
+</div>
+
+<div>
+  <app-synchronize-map-bounds [mapIds]="['left-map', 'right-map']" [activated]="true"></app-synchronize-map-bounds>
 </div>
