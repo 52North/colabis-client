@@ -171,9 +171,13 @@
   dependencies:
     tslib "^1.7.1"
 
+"@helgoland/caching@^0.0.1-alpha.38":
+  version "0.0.1-alpha.38"
+  resolved "https://registry.yarnpkg.com/@helgoland/caching/-/caching-0.0.1-alpha.38.tgz#bb1b0883cef09b7c31f61556286aa37d5e147f62"
+
 "@helgoland/map@^0.0.1-alpha.33":
-  version "0.0.1-alpha.37"
-  resolved "https://registry.yarnpkg.com/@helgoland/map/-/map-0.0.1-alpha.37.tgz#62776f906df59c75a88875e0ae172aab42841413"
+  version "0.0.1-alpha.38"
+  resolved "https://registry.yarnpkg.com/@helgoland/map/-/map-0.0.1-alpha.38.tgz#c52d43f6ad2e84ebd5be9f575c37b6f9054f8e00"
   dependencies:
     "@types/leaflet" "^1.2.5"
     "@types/leaflet.markercluster" "^1.0.2"

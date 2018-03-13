@@ -9,7 +9,7 @@
       Forecast WITHOUT street cleaning
     </div>
     <div class="map">
-      <n52-geometry-map-viewer [mapId]="'left-map'" [overlayMaps]="overlayLeftMaps" [layerControlOptions]="layerControlOptions"
+      <n52-geometry-map-viewer [mapId]="leftMap" [overlayMaps]="overlayLeftMaps" [layerControlOptions]="layerControlOptions"
         [fitBounds]="fitBounds"></n52-geometry-map-viewer>
     </div>
   </div>
@@ -18,12 +18,12 @@
       Forecast WITH street cleaning
     </div>
     <div class="map">
-      <n52-geometry-map-viewer [mapId]="'right-map'" [overlayMaps]="overlayRightMaps" [layerControlOptions]="layerControlOptions"
+      <n52-geometry-map-viewer [mapId]="rightMap" [overlayMaps]="overlayRightMaps" [layerControlOptions]="layerControlOptions"
         [fitBounds]="fitBounds"></n52-geometry-map-viewer>
     </div>
   </div>
 </div>
 
 <div>
-  <app-synchronize-map-bounds [mapIds]="['left-map', 'right-map']" [activated]="true"></app-synchronize-map-bounds>
+  <app-synchronize-map-bounds [mapIds]="[leftMap, rightMap]" [activated]="false"></app-synchronize-map-bounds>
 </div>
