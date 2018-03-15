@@ -1,6 +1,6 @@
 [context.master]
-  command = "yarn build:complete"
-  publish = "dist/complete"
+  command = "yarn build"
+  publish = "dist"
 
 [context.production.environment]
   YARN_FLAGS = "--frozen-lockfile"
