@@ -175,7 +175,7 @@
   version "0.0.1-alpha.38"
   resolved "https://registry.yarnpkg.com/@helgoland/caching/-/caching-0.0.1-alpha.38.tgz#bb1b0883cef09b7c31f61556286aa37d5e147f62"
 
-"@helgoland/map@^0.0.1-alpha.33":
+"@helgoland/map@^0.0.1-alpha.38":
   version "0.0.1-alpha.38"
   resolved "https://registry.yarnpkg.com/@helgoland/map/-/map-0.0.1-alpha.38.tgz#c52d43f6ad2e84ebd5be9f575c37b6f9054f8e00"
   dependencies:
