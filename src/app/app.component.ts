@@ -2,8 +2,8 @@ import { ComponentType } from '@angular/cdk/portal';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { GeoCureGeoJSON, GeoCureGeoJSONOptions, LayerOptions, MapCache } from '@helgoland/map';
-import { circleMarker, GeoJSON, LayerEvent, tileLayer } from 'leaflet';
+import { GeoCureGeoJSON, GeoCureGeoJSONOptions, LayerOptions } from '@helgoland/map';
+import { circleMarker, LayerEvent, tileLayer } from 'leaflet';
 
 import {
   EmissionSimulationDialogComponent,
@@ -66,7 +66,6 @@ export class AppComponent implements OnInit {
 
   constructor(
     private httpClient: HttpClient,
-    private mapCache: MapCache,
     private dialog: MatDialog
   ) { }
 

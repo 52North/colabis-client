@@ -1,10 +1,9 @@
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { MatButtonModule, MatDialogModule, MatSlideToggleModule, MatTableModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpCache, LocalHttpCache, CachingInterceptor, OnGoingHttpCache, LocalOngoingHttpCache } from '@helgoland/caching';
-import { HelgolandMapViewModule } from '@helgoland/map/view';
+import { HelgolandMapViewModule } from '@helgoland/map';
 
 import { AppComponent } from './app.component';
 import {
@@ -44,21 +43,7 @@ import { SynchronizeMapBoundsComponent } from './components/synchronize-map-boun
     StreetCleaningDialogComponent,
     WarningShapesDialogComponent
   ],
-  providers: [
-    {
-      provide: HttpCache,
-      useClass: LocalHttpCache
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: CachingInterceptor,
-      multi: true
-    },
-    {
-      provide: OnGoingHttpCache,
-      useClass: LocalOngoingHttpCache
-    }
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
