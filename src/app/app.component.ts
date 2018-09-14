@@ -1,9 +1,9 @@
 import { ComponentType } from '@angular/cdk/portal';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { GeoCureGeoJSON, GeoCureGeoJSONOptions, LayerOptions } from '@helgoland/map';
-import { circleMarker, LayerEvent, tileLayer } from 'leaflet';
+import { GeoCureGeoJSON, GeoCureGeoJSONOptions, LayerOptions, MapCache } from '@helgoland/map';
+import { circleMarker, featureGroup, Layer, LayerEvent, LeafletMouseEvent, Marker, tileLayer } from 'leaflet';
 
 import {
   EmissionSimulationDialogComponent,
@@ -15,13 +15,14 @@ import {
   StreetCleaningDialogComponent,
 } from './components/feature-dialogs/street-cleaning-dialog/street-cleaning-dialog.component';
 import { WarningShapesDialogComponent } from './components/feature-dialogs/warning-shapes-dialog/warning-shapes.component';
+import { WpsDataAccessorService } from './services/wps-data-accessor.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
 
   public leftMap = 'left-map';
   public rightMap = 'right-map';
@@ -64,9 +65,13 @@ export class AppComponent implements OnInit {
     opacity: 1
   };
 
+  public selectedNodeName: string;
+
   constructor(
     private httpClient: HttpClient,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private wpsData: WpsDataAccessorService,
+    private mapCache: MapCache
   ) { }
 
   public ngOnInit(): void {
@@ -77,6 +82,31 @@ export class AppComponent implements OnInit {
     this.addWscGeoCure();
     this.addWsfGeoCure();
     this.addWmsLayer();
+  }
+
+  public ngAfterViewInit(): void {
+  }
+
+  public showNodes() {
+    const map = this.mapCache.getMap(this.leftMap);
+    this.wpsData.getMinMaxValues().subscribe(
+      res => {
+        const markers: Layer[] = [];
+
+        res.data.forEach(entry => {
+          const marker = circleMarker([entry.y, entry.x]);
+          marker.bindPopup(`<b>${entry.name}</b><br>Min: ${entry.min}<br>Max: ${entry.max}`);
+          marker.on('mouseover', (evt: LeafletMouseEvent) => (evt.target as Marker).openPopup());
+          marker.on('mouseout', (evt: LeafletMouseEvent) => (evt.target as Marker).closePopup());
+          marker.on('click', (evt) => this.selectedNodeName = entry.name);
+          markers.push(marker);
+        });
+
+        const group = featureGroup(markers);
+        group.addTo(map);
+        map.fitBounds(group.getBounds());
+      }
+    );
   }
 
   private addWmsLayer() {

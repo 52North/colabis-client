@@ -1,0 +1,11 @@
+<div *ngIf="!loading;else loadingTemplate">
+  <div *ngIf="additionalData" style="height: 400px; width: 100%;">
+    <n52-extended-data-d3-timeseries-graph [additionalData]="additionalData" [timeInterval]="timespan"
+      [presenterOptions]="graphOptions" (onTimespanChanged)="timespanChanged($event)"></n52-extended-data-d3-timeseries-graph>
+  </div>
+  <div *ngIf="timespan" style="text-align: center">
+    {{timespan.from | date: 'full'}} - {{timespan.to | date: 'full'}}
+  </div>
+</div>
+
+<ng-template #loadingTemplate>Loading...</ng-template>

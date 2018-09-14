@@ -24,6 +24,9 @@
   </div>
 </div>
 
-<div>
+<mat-toolbar>
+  <button mat-raised-button color="primary" (click)="showNodes()" style="margin-right: 20px;">Show Nodes</button>
   <app-synchronize-map-bounds [mapIds]="[leftMap, rightMap]" [activated]="false"></app-synchronize-map-bounds>
-</div>
+</mat-toolbar>
+
+<app-nodes-timeline [nodeName]="selectedNodeName"></app-nodes-timeline>
