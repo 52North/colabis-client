@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { DatasetOptions, Timespan } from '@helgoland/core';
 import { AdditionalData, D3PlotOptions } from '@helgoland/d3';
 import {
@@ -12,7 +12,7 @@ import { WpsDataAccessorService } from '../../services/wps-data-accessor.service
   templateUrl: './nodes-timeline.component.html',
   styleUrls: ['./nodes-timeline.component.scss']
 })
-export class NodesTimelineComponent implements OnInit, OnChanges {
+export class NodesTimelineComponent implements OnChanges {
 
   @Input()
   public nodeName: string;
@@ -28,10 +28,6 @@ export class NodesTimelineComponent implements OnInit, OnChanges {
   constructor(
     private wpsData: WpsDataAccessorService
   ) { }
-
-  public ngOnInit() {
-    this.createTimeline();
-  }
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes.nodeName) {

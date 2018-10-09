@@ -92,9 +92,16 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.wpsData.getMinMaxValues().subscribe(
       res => {
         const markers: Layer[] = [];
-
+        const max = Math.max(...res.data.map(e => e.max));
+        const min = Math.min(...res.data.map(e => e.max));
         res.data.forEach(entry => {
-          const marker = circleMarker([entry.y, entry.x]);
+          const marker = circleMarker([entry.y, entry.x], {
+            color: 'black',
+            weight: 2,
+            radius: 10,
+            fillOpacity: 1,
+            fillColor: this.createNodesColor(entry.max, min, max)
+          });
           marker.bindPopup(`<b>${entry.name}</b><br>Min: ${entry.min}<br>Max: ${entry.max}`);
           marker.on('mouseover', (evt: LeafletMouseEvent) => (evt.target as Marker).openPopup());
           marker.on('mouseout', (evt: LeafletMouseEvent) => (evt.target as Marker).closePopup());
@@ -107,6 +114,11 @@ export class AppComponent implements OnInit, AfterViewInit {
         map.fitBounds(group.getBounds());
       }
     );
+  }
+
+  private createNodesColor(value: number, min: number, max: number): string {
+    const hue = 120 - value * (120 / (max - min));
+    return `hsl(${hue},100%,50%)`;
   }
 
   private addWmsLayer() {
@@ -195,7 +207,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     };
     const layer = new GeoCureGeoJSON(options);
     layer.on('click', (event: LayerEvent) => this.featureClick(event, EmissionSimulationDialogComponent));
-    this.overlayLeftMaps.set('es', { label: 'Emission Simulation', visible: true, layer });
+    this.overlayLeftMaps.set('es', { label: 'Emission Simulation', visible: false, layer });
   }
 
   private addScGeoCure() {
