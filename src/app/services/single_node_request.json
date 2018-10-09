@@ -1,0 +1,31 @@
+{
+  "Execute": {
+    "Identifier": "org.n52.wps.server.r.COLABIS_WPS2_Auslesen",
+    "Input": [{
+        "LiteralData": {
+          "_text": "36M74"
+        },
+        "_id": "name"
+      },
+      {
+        "LiteralData": {
+          "_text": "SingleNode"
+        },
+        "_id": "method"
+      },
+      {
+        "LiteralData": {
+          "_text": "pb"
+        },
+        "_id": "pollutant"
+      }
+    ],
+    "output": [{
+      "_mimeType": "text/plain",
+      "_id": "result",
+      "_transmission": "reference"
+    }],
+    "_service": "WPS",
+    "_version": "2.0.0"
+  }
+}
