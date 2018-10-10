@@ -24,6 +24,7 @@ import { WarningShapesDialogComponent } from './components/feature-dialogs/warni
 import { NodesTimelineComponent } from './components/nodes-timeline/nodes-timeline.component';
 import { SynchronizeMapBoundsComponent } from './components/synchronize-map-bounds/synchronize-map-bounds.component';
 import { WpsDataAccessorService } from './services/wps-data-accessor.service';
+import { WpsService } from './services/wps.service';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { WpsDataAccessorService } from './services/wps-data-accessor.service';
   ],
   providers: [
     WpsDataAccessorService,
+    WpsService,
     {
       provide: DatasetApiInterface,
       useClass: SplittedDataDatasetApiInterface
